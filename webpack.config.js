@@ -8,7 +8,8 @@ module.exports = {
   entry: './src/client/index.js',
   output: {
     path: path.join(__dirname, outputDirectory),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -20,8 +21,8 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
         test: /\.(png|woff|woff2|eot|ttf|svg)$/,
@@ -34,7 +35,8 @@ module.exports = {
     open: true,
     proxy: {
       '/api': 'http://localhost:8080'
-    }
+    },
+    historyApiFallback: true
   },
   plugins: [
     new CleanWebpackPlugin([outputDirectory]),
